@@ -1,0 +1,28 @@
+
+plugins {
+    id 'java-gradle-plugin'
+    id 'groovy'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'xerces:xercesImpl:2.9.0'
+    testImplementation 'com.netflix.nebula:nebula-test:10.5.0'
+    testImplementation 'org.spockframework:spock-core:2.3-groovy-3.0'
+}
+
+tasks.named('test', Test).configure {
+    useJUnitPlatform()
+}
+
+gradlePlugin {
+    plugins {
+        myModules {
+            id = 'netflix.my-modules'
+            implementationClass = 'netflix.ModuleResolverPlugin'
+        }
+    }
+}
